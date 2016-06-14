@@ -4,6 +4,7 @@
   Author:   mikewolfli<mikewolfli@163.com>
   Purpose: gui main frame
   Created: 2016/6/7
+<<<<<<< HEAD
 """
 from tkinter import *
 from tkinter import simpledialog
@@ -170,3 +171,6 @@ if __name__ == '__main__':
     Application(root)
     root.geometry('800x600')
     root.mainloop()
+=======
+"""
+>>>>>>> 18fac031555c51907340e5402da96bccf1f10d1e

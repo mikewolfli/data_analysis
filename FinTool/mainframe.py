@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 #coding:utf-8
-"""
+'''
   Author:   mikewolfli<mikewolfli@163.com>
   Purpose: gui main frame
   Created: 2016/6/7
-<<<<<<< HEAD
-"""
+'''
 from tkinter import *
 from tkinter import simpledialog
 from tkinter import font
@@ -13,18 +12,32 @@ from tkinter import scrolledtext
 from tkinter import messagebox
 from tkinter import filedialog
 import tkinter.ttk as ttk
+import platform
+
+tree_items=['数据同步','历史数据','走势图','数据分析']
+
+class data_syc_pane(Frame):
+    pass
+
+class history_pane(Frame):
+    pass
+
+class run_chart_pane(Frame):
+    pass
+
+class data_analysis_pane(Frame):
+    pass
 
 class mainframe(Frame):
-    import_tab = None
-    operat_tab = None
-    proj_release_tab=None
+    data_syc_tab = None
+    his_data_tab = None
+    run_chart_tab =None
+    data_analysis_tab = None
+    
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack()
         self.createWidgets()  
-        pg_db.connect()
-        if not mbom_db.get_conn():
-            mbom_db.connect()
                                     
     def createWidgets(self):
         self.ntbook = ttk.Notebook(self)
@@ -58,9 +71,6 @@ class mainframe(Frame):
         self.ntbook.bind('<<NotebookTabChanged>>', self.tab_changed)
                            
     def tab_changed(self, event):
-        if not login_info['status']:
-            return
-        
         i_sel = int(self.ntbook.index(CURRENT))
         root = self.tree.get_children()
         if not root :
@@ -71,17 +81,13 @@ class mainframe(Frame):
                 self.tree.selection_set(item)
                 return       
         
-    def select_func(self,event):
-        if not login_info['status']:
-            return
-        
+    def select_func(self,event):        
         select = self.tree.selection()        
         if not select :
             return
         
         sel=select[0]
         i_per = int(self.tree.item(sel, 'values')[0])
-        s_perm = login_info['perm']
                       
         i_sel = self.ntbook.index(END)
         
@@ -89,49 +95,31 @@ class mainframe(Frame):
             nt_title=self.tree.item(sel, 'text')
             i_index=tree_items.index(nt_title)
             if i_index==0:
-                if not self.import_tab and int(s_perm[i_index])>0:
-                    self.import_tab = import_pane(self) 
-                    self.ntbook.add(self.import_tab, text=nt_title, sticky=NSEW)
+                if not self.data_syc_tab:
+                    self.data_syc_tab = data_syc_pane(self) 
+                    self.ntbook.add(self.data_syc_tab, text=nt_title, sticky=NSEW)
                     self.tree.set(sel, 'col0', i_sel)
                     self.ntbook.select(i_sel)
-                else:
-                    self.st_msg.set('没有权限')
-                    return
             elif i_index==1:
-                if not self.operat_tab and int(s_perm[i_index])>0:
-                    self.operat_tab = mat_fin_pane(self)
-                    self.ntbook.add(self.operat_tab, text=nt_title, sticky=NSEW) 
+                if not self.his_data_tab:
+                    self.his_data_tab = history_pane(self)
+                    self.ntbook.add(self.his_data_tab, text=nt_title, sticky=NSEW) 
                     self.tree.set(sel, 'col0', i_sel)
                     self.ntbook.select(i_sel)
-                else:
-                    self.st_msg.set('没有权限')
-                    return
             elif i_index==2:
-                if not self.proj_release_tab and int(s_perm[i_index])>0:
-                    self.proj_release_tab = proj_release_pane(self)
-                    self.ntbook.add(self.proj_release_tab, text=nt_title, sticky=NSEW) 
+                if not self.run_chart_tab:
+                    self.run_chart_tab = run_chart_pane(self)
+                    self.ntbook.add(self.run_chart_tab, text=nt_title, sticky=NSEW) 
                     self.tree.set(sel, 'col0', i_sel)
                     self.ntbook.select(i_sel)
-                else:
-                    self.st_msg.set('没有权限')
-                    return 
-        else:
-            if int(s_perm[i_per]) <= 0:
-                self.st_msg.set('没有权限')
-                return
-                
-            self.ntbook.select(i_per)
-
-        '''                       
-        if i_per ==0:
-            self.ntbook.add(self.import_tab)
-        elif i_per ==1:
-            self.ntbook.add(self.operat_tab)
-        elif i_per ==2:
-            self.ntbook.add(self.proj_release_tab)
-            
-        self.ntbook.select(i_per)  
-'''        
+            elif i_index==3:
+                if not self.data_analysis_tab:
+                    self.data_analysis_tab = data_analysis_pane(self)
+                    self.ntbook.add(self.data_analysis_tab, text=nt_title, sticky=NSEW)
+                    self.tree.set(sel, 'col0', i_sel)
+                    self.ntbook.select(i_sel)
+        else:                
+            self.ntbook.select(i_per)   
     
         
 class Application():
@@ -140,37 +128,24 @@ class Application():
         root.columnconfigure(0, weight=1)
         root.rowconfigure(0, weight=1)
         main_frame.grid(row=0, column=0, sticky=NSEW)
-        LoginForm(main_frame, '用户登陆')
-        #popup.attributes("-toolwindow",1)
-        #popup.wm_attributes("-topmost",1)
-
-        #for t in threads:
-        #    t.join()
         
         root.protocol("WM_DELETE_WINDOW", self.quit_func)
 
-    def quit_func(self):
-        if pg_db.get_conn():
-            pg_db.close()
-            
-        if mbom_db.get_conn() and login_info['status']:
-            log_loger = login_log.update(logout_time = datetime.datetime.now(), log_status=False).where((login_log.employee==login_info['uid'])&(login_log.log_status==True))
-            log_loger.execute()            
-            mbom_db.close()
-            
+    def quit_func(self):          
         root.destroy()
                 
 if __name__ == '__main__':   
     root=Tk() 
     #root.resizable(0, 0)
-    root.wm_state('zoomed')
-    root.title('非标物料处理')
+    sysstr = platform.system()
+    if sysstr == 'Windows':
+        root.wm_state('zoomed')
+    else:
+        root.wm_state('normal')
+    root.title('股票分析器')
     default_font = font.nametofont("TkDefaultFont")
     default_font.configure(size=10)  
     root.option_add("*Font", default_font)
     Application(root)
     root.geometry('800x600')
     root.mainloop()
-=======
-"""
->>>>>>> 18fac031555c51907340e5402da96bccf1f10d1e

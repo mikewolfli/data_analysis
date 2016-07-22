@@ -12,9 +12,29 @@ from tkinter import scrolledtext
 from tkinter import messagebox
 from tkinter import filedialog
 import tkinter.ttk as ttk
-import platform
+#import platform
+import logging 
 
-tree_items=['数据同步','历史数据','走势图','数据分析']
+
+class TextHandler(logging.Handler):
+    """This class allows you to log to a Tkinter Text or ScrolledText widget"""
+    def __init__(self, text):
+        # run the regular Handler __init__
+        logging.Handler.__init__(self)
+        # Store a reference to the Text it will log to
+        self.text = text
+
+    def emit(self, record):
+        self.formatter = logging.Formatter('%(asctime)s-%(levelname)s : %(message)s')
+        msg = self.format(record)
+        def append():
+            self.text.configure(state='normal')          
+            self.text.insert(END, msg+"\n")
+            self.text.configure(state='disabled')
+            # Autoscroll to the bottom
+            self.text.yview(END)
+        # This is necessary because we can't modify the Text from other threads
+        self.text.after(0, append)# Scroll to the bottom
 
 class data_syc_pane(Frame):
     pass
@@ -137,11 +157,17 @@ class Application():
 if __name__ == '__main__':   
     root=Tk() 
     #root.resizable(0, 0)
-    sysstr = platform.system()
-    if sysstr == 'Windows':
-        root.wm_state('zoomed')
-    else:
-        root.wm_state('normal')
+    #sysstr = platform.system()
+    try:                                   # Automatic zoom if possible
+        root.wm_state("zoomed")
+    except TclError:                    # Manual zoom
+        # get the screen dimensions
+        width = root.winfo_screenwidth()
+        height = root.winfo_screenheight()
+
+        # borm: width x height + x_offset + y_offset
+        geom_string = "%dx%d+0+0" % (width, height)
+        root.wm_geometry(geom_string)
     root.title('股票分析器')
     default_font = font.nametofont("TkDefaultFont")
     default_font.configure(size=10)  

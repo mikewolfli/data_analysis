@@ -388,7 +388,23 @@ industry_classified_dic={
                          'name':'股票名称',
                          'c_name':'行业名称',
                          }
+'''
+概念分类
+'''
+concept_classified_dic  = {
+                           'code':'股票代码',
+                           'name':'股票名称',
+                           'c_name':'概念名称',
+}
 
+'''
+地域分类
+'''
+area_classified_dic = {
+                       'code':'股票代码',
+                       'name':'股票名称',
+                       'area':'地域名称',                    
+                       }
 
 
 

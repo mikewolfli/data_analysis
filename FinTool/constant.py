@@ -558,3 +558,379 @@ cashflow_data_dic = {
                      'cf_liabilities':'经营现金净流量对负债比率',
                      'cashflowratio':'现金流量比率',                    
                      }
+
+#宏观经济数据
+'''
+存款利率
+------
+import tushare as ts
+ts.get_deposit_rate()
+'''
+deposit_rate_dic = {
+                    'date':'变动日期',
+                    'deposit_type':'存款种类',
+                    'rate':'利率（%）',                   
+                    }
+
+'''
+贷款利率
+-------
+import tushare as ts
+ts.get_loan_rate()
+'''
+loan_rate_dic = {
+                 'date':'执行日期',
+                 'loan_type':'存款种类',
+                 'rate':'利率（%）',                 
+                 }
+
+'''
+存款准备金率
+-----
+
+import tushare as ts
+
+ts.get_rrr()
+'''
+rrr_dic = {
+           'date':'变动日期',
+           'before':'调整前存款准备金率(%)',
+           'now':'调整后存款准备金率(%)',
+           'changed':'调整幅度(%)',
+           }
+
+'''
+货币供应量
+-------
+import tushare as ts
+ts.get_money_supply()
+'''
+money_supply_dic = {
+                    'month':'统计时间',
+                    'm2':'货币和准货币（广义货币M2）(亿元)',
+                    'm2_yoy':'货币和准货币（广义货币M2）同比增长(%)',
+                    'm1':'货币(狭义货币M1)(亿元)',
+                    'm1_yoy':'货币(狭义货币M1)同比增长(%)',
+                    'm0':'流通中现金(M0)(亿元)',
+                    'm0_yoy':'流通中现金(M0)同比增长(%)',
+                    'cd':'活期存款(亿元)',
+                    'cd_yoy':'活期存款同比增长(%)',
+                    'qm':'准货币(亿元)',
+                    'qm_yoy':'准货币同比增长(%)',
+                    'ftd':'定期存款(亿元)',
+                    'ftd_yoy':'定期存款同比增长(%)',
+                    'sd':'储蓄存款(亿元)',
+                    'sd_yoy':'储蓄存款同比增长(%)',
+                    'rests':'其他存款(亿元)',
+                    'rests_yoy':'其他存款同比增长(%)',                   
+                    }
+
+'''
+货币供应量(年底余额)
+--------
+import tushare as ts
+ts.get_money_supply_bal()
+'''
+money_suppliy_bal_dic = {
+                         'year':'统计年度',
+                         'm2':'货币和准货币(亿元)',
+                         'm1':'货币(亿元)',
+                         'm0':'流通中现金(亿元)',
+                         'cd':'活期存款(亿元)',
+                         'qm':'准货币(亿元)',
+                         'ftd':'定期存款(亿元)',
+                         'sd':'储蓄存款(亿元)',
+                         'rests':'其他存款(亿元)',                        
+                         }
+
+'''
+国内生产总值(年度)
+------
+import tushare as ts
+ts.get_gdp_year()
+'''
+gdp_year_dic={
+              'year':'统计年度',
+              'gdp':'国内生产总值(亿元)',
+              'pc_gdp':'人均国内生产总值(元)',
+              'gnp':'国民生产总值(亿元)',
+              'pi':'第一产业(亿元)',
+              'si':'第二产业(亿元)',
+              'industry':'工业(亿元)',
+              'cons_industry':'建筑业(亿元)',
+              'ti':'第三产业(亿元)',
+              'trans_industry':'交通运输仓储邮电通信业(亿元)',
+              'lbdy':'批发零售贸易及餐饮业(亿元)',
+              }
+'''
+国内生产总值(季度)¶
+--------
+import tushare as ts
+ts.get_gdp_quarter()
+'''
+gdp_quarter_dic = {
+                   'quarter':'季度',
+                   'gdp':'国内生产总值(亿元)',
+                   'gdp_yoy':'国内生产总值同比增长(%)',
+                   'pi':'第一产业增加值(亿元)',
+                   'pi_yoy':'第一产业增加值同比增长(%)',
+                   'si':'第二产业增加值(亿元)',
+                   'si_yoy':'第二产业增加值同比增长(%)',
+                   'ti':'第三产业增加值(亿元)',
+                   'ti_yoy':'第三产业增加值同比增长(%)',                  
+                   }
+
+'''
+三大需求对GDP贡献
+-----------
+import tushare as ts
+ts.get_gdp_for()
+'''
+gdp_for_dic = {
+               'year':'统计年度',
+               'end_for':'最终消费支出贡献率(%)',
+               'for_rate':'最终消费支出拉动(百分点)',
+               'asset_for' :'资本形成总额贡献率(%)',
+               'asset_rate':'资本形成总额拉动(百分点)',
+               'goods_for' :'货物和服务净出口贡献率(%)',
+               'goods_rate':'货物和服务净出口拉动(百分点)',              
+               }
+
+'''
+三大产业对GDP拉动
+-----------
+import tushare as ts
+ts.get_gdp_pull()
+'''
+gdp_pull_dic = {
+                'year':'统计年度',
+                'gdp_yoy':'国内生产总值同比增长(%)',
+                'pi':'第一产业拉动率(%)',
+                'si' :'第二产业拉动率(%)',
+                'industry':'其中工业拉动(%)',
+                'ti' :'第三产业拉动率(%)',                
+                }
+
+'''
+三大产业贡献率
+------------
+import tushare as ts
+ts.get_gdp_contrib()
+'''
+gdp_contrib_dic = {
+                   'year':'统计年度',
+                   'gdp_yoy':'国内生产总值',
+                   'pi':'第一产业献率(%)',
+                   'si':'第二产业献率(%)',
+                   'industry':'其中工业献率(%)',
+                   'ti':'第三产业献率(%)',                  
+                   }
+
+'''
+居民消费价格指数
+---------
+import tushare as ts
+ts.get_cpi()
+'''
+cpi_dic = {
+           'month':'统计月份',
+           'cpi':'价格指数',
+           }
+
+'''
+工业品出厂价格指数
+------------
+import tushare as ts
+ts.get_ppi()
+'''
+ppi_dic = {
+           'month':'统计月份',
+           'ppiip':'工业品出厂价格指数',
+           'ppi' :'生产资料价格指数',
+           'qm':'采掘工业价格指数',
+           'rmi':'原材料工业价格指数',
+           'pi':'加工工业价格指数',
+           'cg':'生活资料价格指数',
+           'food':'食品类价格指数',
+           'clothing':'衣着类价格指数',
+           'roeu':'一般日用品价格指数',
+           'dcg':'耐用消费品价格指数',         
+           }
+
+
+
+#新闻事件数据
+'''
+即时新闻
+获取即时财经新闻，类型包括国内财经、证券、外汇、期货、港股和美股等新闻信息。数据更新较快，使用过程中可用定时任务来获取。
+---------------------
+import tushare as ts
+ts.get_latest_news() #默认获取最近80条新闻数据，只提供新闻类型、链接和标题
+ts.get_latest_news(top=5,show_content=True) #显示最新5条新闻，并打印出新闻内容
+'''
+latest_news_para_dic = {
+                        'top':'最新消息的条数',#int，显示最新消息的条数，默认为80条
+                        'show_content':'是否显示新闻内容',# boolean,是否显示新闻内容，默认False
+                        }
+
+latest_news_dic = {
+                   'classify':'新闻类别',
+                   'title':'新闻标题',
+                   'time':'发布时间',
+                   'url':'新闻链接',
+                   'content':'新闻内容',#（在show_content为True的情况下出现）                  
+                   }
+
+'''
+信息地雷
+----
+import tushare as ts
+
+ts.get_notices()
+'''
+notices_para_dic = {
+                    'code':'股票代码',
+                    'date':'信息公布日期',
+                    }
+
+notices_dic = {
+               'title':'信息标题',
+               'type':'信息类型',
+               'date':'公告日期',
+               'url':'信息内容URL',              
+               }
+
+'''
+新浪股吧
+获取sina财经股吧首页的重点消息。股吧数据目前获取大概17条重点数据，可根据参数设置是否显示消息内容，默认情况是不显示。
+-------
+import tushare as ts
+ts.guba_sina()
+'''
+guba_sina_para_dic = {
+                      'show_content':'是否显示内容',#boolean,是否显示内容，默认False
+                      }
+
+guba_sina_dic = {
+                 'title':'消息标题',
+                 'content':'消息内容',#（show_content=True的情况下）
+                 'ptime':'发布时间',
+                 'rcounts':'阅读次数',                
+                 }
+
+#龙虎榜数据
+'''
+每t日龙虎榜列表
+按日期获取历史当日上榜的个股数据，如果一个股票有多个上榜原因，则会出现该股票多条数据。
+-----
+import tushare as ts
+ts.top_list('2016-06-12')
+'''
+top_list_para_dic = {
+                     'date':'日期',#格式YYYY-MM-DD
+                     'retry_count':'重试次数',#当网络异常后重试次数，默认为3
+                     'pause':'停顿秒数',#重试时停顿秒数，默认为0                    
+                     }
+
+top_list_dic = {
+                'code':'代码',
+                'name':'名称',
+                'pchange':'当日涨跌幅',
+                'amount':'龙虎榜成交额(万)',
+                'buy':'买入额(万)',
+                'bratio':'买入占总成交比例',
+                'sell':'卖出额(万)',
+                'sratio':'卖出占总成交比例',
+                'reason':'上榜原因',
+                'date':'日期',                
+                }
+
+'''
+个股上榜统计
+获取近5、10、30、60日个股上榜统计数据,包括上榜次数、累积购买额、累积卖出额、净额、买入席位数和卖出席位数。
+--------
+import tushare as ts
+ts.cap_tops()
+'''
+cap_tops_dic={
+              'code':'代码',
+              'name':'名称',
+              'count':'上榜次数',
+              'bamount':'累积购买额(万)',
+              'samount':'累积卖出额(万)',
+              'net':'净额(万)',
+              'bcount':'买入席位数',
+              'scount':'卖出席位数',             
+              }
+
+'''
+营业部上榜统计
+获取营业部近5、10、30、60日上榜次数、累积买卖等情况。
+-------
+import tushare as ts
+ts.broker_tops()
+'''
+broker_tops_dic = {
+                   'broker':'营业部名称',
+                   'count':'上榜次数',
+                   'bamount':'累积购买额(万)',
+                   'bcount':'买入席位数',
+                   'samount':'累积卖出额(万)',
+                   'scount':'卖出席位数',
+                   'top3':'买入前三股票',                   
+                   }
+
+'''
+机构席位追踪
+获取机构近5、10、30、60日累积买卖次数和金额等情况。
+-------
+import tushare as ts
+ts.inst_tops()
+'''
+ins_tops_dic = {
+                'code':'代码',
+                'name':'名称',
+                'bamount':'累积买入额(万)',
+                'bcount':'买入次数',
+                'samount':'累积卖出额(万)',
+                'scount':'卖出次数',
+                'net':'净额(万)',                
+                }
+
+'''
+机构成交明细
+获取最近一个交易日机构席位成交明细统计数据
+--------
+import tushare as ts
+ts.inst_detail()
+'''
+inst_detail_dic = {
+                   'code':'代码',
+                   'name':'名称',
+                   'date':'交易日期',
+                   'bamount':'机构席位买入额(万)',
+                   'samount':'机构席位卖出额(万)',
+                   'type':'类型',                   
+                   }
+
+#银行间同业拆放利率
+'''
+Shibor拆放利率
+获取银行间同业拆放利率数据，目前只提供2006年以来的数据。
+--------
+import tushare as ts
+df = ts.shibor_data() #取当前年份的数据
+#df = ts.shibor_data(2014) #取2014年的数据
+df.sort('date', ascending=False).head(10)
+'''
+shibor_data_dic = {
+                   'date':'日期',
+                   'ON':'隔夜拆放利率',
+                   '1W':'1周拆放利率',
+                   '2W':'2周拆放利率',
+                   '1M':'1个月拆放利率',
+                   '3M':'3个月拆放利率',
+                   '6M':'6个月拆放利率',
+                   '9M':'9个月拆放利率',
+                   '1Y':'1年拆放利率',                   
+                   }

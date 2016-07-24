@@ -11,6 +11,7 @@ from tkinter import font
 from tkinter import scrolledtext
 from tkinter import messagebox
 from tkinter import filedialog
+from constant import *
 import tkinter.ttk as ttk
 #import platform
 import logging 

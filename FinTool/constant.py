@@ -934,3 +934,127 @@ shibor_data_dic = {
                    '9M':'9个月拆放利率',
                    '1Y':'1年拆放利率',                   
                    }
+
+'''
+Shibor均值数据
+获取Shibor均值数据，目前只提供2006年以来的数据。
+----------
+
+import tushare as ts
+df = ts.shibor_ma_data() #取当前年份的数据
+#df = ts.shibor_ma_data(2014) #取2014年的数据
+df.sort('date', ascending=False).head(10)
+'''
+shibor_ma_data_dic = {
+                      
+                      }
+
+'''
+贷款基础利率（LPR）
+获取贷款基础利率（LPR）数据，目前只提供2013年以来的数据。
+--------------
+import tushare as ts
+df = ts.lpr_data() #取当前年份的数据
+#df = ts.lpr_data(2014) #取2014年的数据
+df.sort('date', ascending=False).head(10)
+'''
+lpr_data_dic = {
+                'date':'日期',
+                '1Y':'1年贷款基础利率',                
+                }
+
+'''
+LPR均值数据
+获取贷款基础利率均值数据，目前只提供2013年以来的数据。
+--------------
+import tushare as ts
+df = ts.lpr_ma_data() #取当前年份的数据
+#df = ts.lpr_ma_data(2014) #取2014年的数据
+df.sort('date', ascending=False).head(10)
+'''
+lpr_ma_data_dic = {
+                   'date':'日期',
+                   '1Y_5':'5日均值',
+                   '1Y_10':'10日均值',
+                   '1Y_20':'20日均值',                   
+                   }
+
+#电影票房
+'''
+实时票房
+获取实时电影票房数据，30分钟更新一次票房数据，可随时调用。
+---------------------
+import tushare as ts
+df = ts.realtime_boxoffice()
+print(df)
+'''
+realtime_boxoffice_dic = {
+                          'BoxOffice':'实时票房（万）',
+                          'Irank':'排名',
+                          'MovieName':'影片名',
+                          'boxPer':'票房占比 （%）',
+                          'movieDay':'上映天数',
+                          'sumBoxOffice':'累计票房（万）',
+                          'time':'数据获取时间',                          
+                          }
+
+'''
+每日票房
+获取单日电影票房数据，默认为上一日的电影票房，可输入参数获取指定日期的票房。
+-------------
+import tushare as ts
+df = ts.day_boxoffice() #取上一日的数据
+#df = ts.day_boxoffice('2015-12-24')  #取指定日期的数据
+'''
+day_boxoffice_dic= {                   
+                    'AvgPrice':'平均票价',
+                    'AvpPeoPle':'场均人次',
+                    'BoxOffice':'单日票房（万）',
+                    'BoxOffice_Up':'环比变化 （%）',
+                    'IRank':' 排名',
+                    'MovieDay':'上映天数',
+                    'MovieName':'影片名',
+                    'SumBoxOffice':'累计票房（万）',
+                    'WomIndex':'口碑指数',                   
+                     }
+
+'''
+月度票房¶
+获取单月电影票房数据，默认为上一月，可输入月份参数获取指定月度的数据。
+---------------
+import tushare as ts
+df = ts.month_boxoffice() #取上一月票房数据
+#df = ts.month_boxoffice('2015-10') #取2015年10月的数据
+'''
+month_boxoffice_dic = {
+                       'Irank':'排名',
+                       'MovieName':'电影名称',
+                       'WomIndex':'口碑指数',
+                       'avgboxoffice':'平均票价',
+                       'avgshowcount':'场均人次',
+                       'box_pro':'月度占比',
+                       'boxoffice':'单月票房(万)',
+                       'days':'月内天数',
+                       'releaseTime':'上映日期',                      
+                       }
+
+'''
+影院日度票房
+获取全国影院单日票房排行数据，
+默认为上一日，可输入日期参数获取指定日期的数据。
+-----------------------
+import tushare as ts
+df = ts.day_cinema() #取上一日全国影院票房排行数据
+#df = ts.day_cinema('2015-12-24') #取指定日期的数据
+df.head(10)
+'''
+day_cinemal_dic = {
+                   'Attendance':'上座率',
+                   'AvgPeople':'场均人次',
+                   'CinemaName':'影院名称',
+                   'RowNum':'排名',
+                   'TodayAudienceCount':'当日观众人数',
+                   'TodayBox':'当日票房',
+                   'TodayShowCount':'当日场次',
+                   'price':'场均票价（元）'                   
+                   }

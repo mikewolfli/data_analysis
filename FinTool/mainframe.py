@@ -36,6 +36,8 @@ class TextHandler(logging.Handler):
             self.text.yview(END)
         # This is necessary because we can't modify the Text from other threads
         self.text.after(0, append)# Scroll to the bottom
+        
+logger = logging.getLogger()
 
 class data_syc_pane(Frame):
     pass
@@ -71,9 +73,9 @@ class mainframe(Frame):
         ysb = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
         xsb = ttk.Scrollbar(self, orient='horizontal', command=self.tree.xview)
         self.tree.configure(yscroll=ysb.set, xscroll=xsb.set)
-        self.tree.grid(row=0, column=0, sticky=NS)
+        self.tree.grid(row=0, column=0, rowspan=3,sticky=NS)
         ysb.grid(row=0, column=1, sticky=NS)
-        xsb.grid(row=1,column=0, sticky=EW)
+        xsb.grid(row=4,column=0, sticky=EW)
         
         tree_root = self.tree.insert('','end', text='操作列表', open =True)
         for item in tree_items:
@@ -84,10 +86,18 @@ class mainframe(Frame):
         self.columnconfigure(2, weight=1)
         self.ntbook.rowconfigure(0, weight=1)
         self.ntbook.columnconfigure(0, weight=1)
-        self.st_msg = StringVar()
-        self.status_bar = Label(self,textvariable=self.st_msg, anchor='w')
-        self.status_bar.grid(row=2, column=0, columnspan=4, sticky=EW)
-
+        
+        self.log_text=scrolledtext.ScrolledText(self, state='disabled')
+        self.log_text.config(font=('TkFixedFont', 10, 'normal'))
+        self.log_text.grid(row=3, column=2, rowspan=2, sticky=EW)
+              
+        # Create textLogger
+        text_handler = TextHandler(self.log_text)        
+        # Add the handler to logger
+        
+        logger.addHandler(text_handler)
+        logger.setLevel(logging.INFO) 
+        
         self.tree.bind('<<TreeviewSelect>>',self.select_func)
         self.ntbook.bind('<<NotebookTabChanged>>', self.tab_changed)
                            
